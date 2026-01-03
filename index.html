@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bye 2025 → Hello 2026 ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&family=Mali:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100svh;
+    font-family: 'Mali', 'Kanit', sans-serif;
+    background: linear-gradient(135deg, #2c003e, #120028);
+    overflow: hidden;
+}
+
+/* ===== หน้าปก ===== */
+.cover {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,20,147,.95), rgba(0,255,255,.9));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    z-index: 100;
+    padding: 24px;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.cover.hide {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.05);
+}
+
+.cover h1 {
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    margin: 0;
+}
+
+.cover p {
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    margin: 16px 0 32px;
+}
+
+.cover button {
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    border-radius: 999px;
+    border: none;
+    background: #fff;
+    color: #ff1493;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ===== โครงหลัก ===== */
+.main {
+    min-height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+}
+
+/* ใช้ aspect-ratio แทน height fix */
+.card-container {
+    width: min(92vw, 420px);
+    aspect-ratio: 3 / 4.6;
+    perspective: 2000px;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+}
+
+/* ===== ปีเก่า ===== */
+.old-year {
+    position: absolute;
+    inset: 0;
+    background: url('https://www.textures4photoshop.com/tex/thumbs/old-crumpled-paper-texture-16-thumb.jpg') center / cover;
+    border-radius: inherit;
+    box-shadow: 0 16px 40px rgba(0,0,0,.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: clamp(20px, 5vw, 44px);
+    color: #444;
+    z-index: 5;
+}
+
+.old-year h1 {
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    margin: 0;
+}
+
+.old-year p {
+    font-size: clamp(1.1rem, 4.5vw, 1.7rem);
+    margin: 20px 0;
+}
+
+/* ===== ปีใหม่ ===== */
+.new-year {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,20,147,.9), rgba(0,255,255,.8));
+    border-radius: inherit;
+    box-shadow: 0 0 70px rgba(255,0,255,.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(20px, 5vw, 44px);
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    transform: scale(.9);
+    transition: all 1.4s ease;
+}
+
+.new-year h2 {
+    font-size: clamp(1.9rem, 6vw, 3rem);
+    margin-bottom: 16px;
+}
+
+.message {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    line-height: 1.8;
+}
+
+/* ===== Animation ===== */
+.crumple {
+    animation: crumple 1.4s ease forwards;
+}
+
+@keyframes crumple {
+    to { transform: scale(0) rotate(180deg); opacity: 0; }
+}
+
+.reveal {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== เอฟเฟกต์ลอย ===== */
+.sparkle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 2em;
+    animation: sparkle 6s linear infinite;
+    opacity: 0;
+}
+
+@keyframes sparkle {
+    0% { transform: translateY(-15svh); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translateY(120svh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- หน้าปก -->
+<div class="cover" id="cover">
+    <h1>เรื่องเล่าปลายปี</h1>
+    <p>จาก 2025 สู่ 2026</p>
+    <button onclick="startStory()">เปิดเรื่อง</button>
+</div>
+
+<div class="main">
+    <div class="card-container">
+        <div class="card">
+
+            <div class="old-year" id="oldYear">
+                <div style="font-size:3rem;">🗑️💥</div>
+                <h1>Bye Bye<br>2025</h1>
+                <p>ขยำปีเก่า แล้วเริ่มใหม่</p>
+            </div>
+
+            <div class="new-year" id="newYear">
+                <h2>Happy New Year 2026 ♡</h2>
+                <div class="message">
+                    ขอให้ปีใหม่นี้<br>
+                    เหนื่อยน้อยลง ยิ้มง่ายขึ้น<br><br>
+                    มีความสุขในแบบของตัวเอง
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+function startStory() {
+    document.getElementById("cover").classList.add("hide");
+
+    setTimeout(() => {
+        const oldYear = document.getElementById("oldYear");
+        const newYear = document.getElementById("newYear");
+
+        oldYear.classList.add("crumple");
+        setTimeout(() => newYear.classList.add("reveal"), 1400);
+    }, 700);
+}
+
+function sparkle() {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.textContent = ["✨","💖","⭐","🌟","💫"][Math.floor(Math.random()*5)];
+    s.style.left = Math.random()*100 + "vw";
+    s.style.animationDuration = 4 + Math.random()*3 + "s";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),7000);
+}
+setInterval(sparkle, 400);
+</script>
+
+</body>
+</html>
